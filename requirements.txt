@@ -1,6 +1,6 @@
-numpy
+numpy==1.23.5
 scipy
 boolean.py
-networkx
+networkx==2.8.8
 scikit-umfpack
 pandas
