@@ -82,31 +82,6 @@ class StateTransitionTable:
         
         return update_matrix
         
-    def fcn_states_inds(self, yes_no, n_isl_exp):
-    
-        n_series_exp = self.n - 1
-        yes_no = yes_no - 1
-        
-        f_mat = np.array(
-            range(
-                1, 
-                pow(2, (self.n-n_isl_exp))+1
-            )
-        ) + yes_no
-
-        t_repmat = np.array([f_mat]*int(pow(2, n_isl_exp)))
-            
-        t_reshaped = np.reshape(t_repmat, (1, int(pow(2, self.n))), order='F')
-        
-        t_mult = t_reshaped*pow(2, n_isl_exp)
-        t_last = np.array(
-            range(
-                1, 
-                pow(2, self.n)+1
-            )
-        )
-        
-        return np.sum([t_last, t_mult])-1
         
     def fcn_build_stg_table(self):
         list_binary_states = np.remainder(
@@ -119,21 +94,15 @@ class StateTransitionTable:
         ).astype(bool)
         
         update_table = self.fcn_build_update_table(list_binary_states)
-        
+
+        up_trans_source_tmp = np.logical_and(update_table, np.logical_not(list_binary_states))
         up_trans_source = [
-            np.intersect1d(
-                np.nonzero(update_table[:, x])[0],
-                self.fcn_states_inds(0, x)[0, :]
-            ) 
-            for x in range(self.n)
+            np.nonzero(up_trans_source_tmp[:, x])[0] for x in range(self.n)
         ]
-            
+
+        down_trans_source_tmp = np.logical_and(np.logical_not(update_table), list_binary_states)
         down_trans_source = [
-            np.intersect1d(
-                np.nonzero(np.logical_not(update_table[:, x]))[0],
-                self.fcn_states_inds(1, x)[0, :]
-            ) 
-            for x in range(self.n)
+            np.nonzero(down_trans_source_tmp[:, x])[0] for x in range(self.n)
         ]
         
         down_trans_target = [
