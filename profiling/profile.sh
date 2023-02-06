@@ -1,1 +1,1 @@
-py-spy record -o profile.svg -- python run.py
+py-spy record -o profile-$1.svg -- python run-$1.py
