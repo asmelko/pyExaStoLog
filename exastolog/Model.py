@@ -30,9 +30,9 @@
 
 import boolean
 
-from .TransRateTable import TransRateTable
-from .StateTransitionTable import StateTransitionTable
-from .StateTransitionGraph import StateTransitionGraph
+from TransRateTable import TransRateTable
+from StateTransitionTable import StateTransitionTable
+from StateTransitionGraph import StateTransitionGraph
 
 class Model:
     

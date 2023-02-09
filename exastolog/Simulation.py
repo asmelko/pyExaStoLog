@@ -28,9 +28,9 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from .InitialState import InitialState
-from .StateTransitionSubGraphs import StateTransitionSubGraphs
-from .Solution import Solution
+from InitialState import InitialState
+from StateTransitionSubGraphs import StateTransitionSubGraphs
+from Solution import Solution
 import numpy as np
 import pandas as pd
 
